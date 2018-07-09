@@ -1,0 +1,220 @@
+{
+  "js": {
+    "common": {
+      "plugins": [
+        "plugins/common/bluebird.min.js"
+      ],
+      "tool": [
+        "js/uinv.js",
+        "js/uinv_util.js",
+        "js/3d/base/tools/config_tools.js"
+      ],
+      "server": [
+        "js/server/_init_.js",
+        "js/server/uinv-admin-1.0.0.js",
+        "js/server/uinv-business-1.0.1.js",
+        "js/server/uinv-config-1.0.1.js",
+        "js/server/uinv-data-1.0.0.js",
+        "js/server/uinv-frameconfig-1.0.0.js",
+        "js/server/uinv-license-1.0.1.js",
+        "js/server/uinv-link-1.0.1.js",
+        "js/server/uinv-manage-1.0.1.js",
+        "js/server/uinv-monitor-1.0.1.js",
+        "js/server/uinv-security-1.0.1.js"
+      ],
+      "version": [
+        "js/ver.js",
+        "js/language/layerpool.js",
+        "js/language/version.js"
+      ]
+    },
+    "browser": {
+      "plugins": [
+        "plugins/jquery/jquery-1.8.1.min.js",
+        "plugins/jquery/jquery-ajax-cache.js",
+        "plugins/layer/layer.js"
+      ],
+      "tool-brow": [
+        "js/browser/uinv_browser.js"
+      ],
+      "init": [
+        "js/init.js"
+      ]
+    },
+    "3d": {
+      "common-t3d": [
+        "js/3d/t3djs/base.js"
+      ],
+      "common": {
+        "plugins": [
+          "plugins/common/md5.min.js",
+          "plugins/common/uuid.js"
+        ],
+        "t3d-ex": [
+          "js/3d/t3djs/base_ex.js",
+          "js/node/invoke.js"
+        ]
+      },
+      "browser": {
+        "t3d-ex-brow": [
+          "js/browser/plugin_init.js"
+        ],
+        "3d-pre": [
+          "js/3d/_init_.js"
+        ]
+      },
+      "node-only": {
+        "plugins": [
+          "plugins/common/webStorage.js"
+        ],
+        "tool-node": [
+          "js/node/uinv_node.js"
+        ]
+      },
+      "node-can-for-browser": {
+        "config-pre": [
+          "js/config/config-user.js"
+        ],
+        "3d-base": [
+          "js/3d/userMakerDataVersion.js",
+          "js/3d/videoCardInfo.js",
+          "js/3d/base/interface_dependent_t3djs.js",
+          "js/3d/base/timer.js",
+          "js/3d/base/tools/common_tools.js",
+          "js/3d/base/product_lib.js",
+          "js/3d/base/pause.js",
+          "js/3d/base/input.js",
+          "js/3d/base/mat_text.js",
+          "js/3d/base/obj_factory.js",
+          "js/3d/base/obj_base.js",
+          "js/3d/base/obj_base_noNode.js",
+          "js/3d/base/obj_placement.js",
+          "js/3d/base/obj_manual.js",
+          "js/3d/base/obj_billboard.js",
+          "js/3d/base/obj_moniterPanel.js",
+          "js/3d/base/obj_building.js",
+          "js/3d/base/widget_base.js",
+          "js/3d/base/widget_lib.js",
+          "js/3d/base/widget_menu.js",
+          "js/3d/base/widget_menu_rainbow.js",
+          "js/3d/base/widget_menu_rainbow_2.js",
+          "js/3d/base/modifier_base.js",
+          "js/3d/base/modifier_lib.js",
+          "js/3d/base/tools/controllerTools.js",
+          "js/3d/base/tools/JSRuner.js",
+          "js/3d/base/tools/effect_tools.js",
+          "js/3d/base/tools/scene_builder.js",
+          "js/3d/base/tools/selection_tools.js",
+          "js/3d/base/tools/camera_tools.js",
+          "js/3d/base/tools/contextMenu_tools.js",
+          "js/3d/base/tools/layer_tools.js",
+          "js/3d/base/tools/search_tools.js",
+          "js/3d/base/tools/monitor_tools.js",
+          "js/3d/base/tools/alarm_tools.js",
+          "js/3d/base/tools/note_tools.js",
+          "js/3d/base/tools/volume_tools.js",
+          "js/3d/base/tools/historyTools.js",
+          "js/3d/base/widget_miniMap.js",
+          "js/3d/base/state_manager.js",
+          "js/3d/base/state_base.js",
+          "js/3d/base/app.js",
+          "js/3d/base/tools/contextMenu_lib.js",
+          "js/3d/base/tools/contextMenu_setup.js",
+          "js/3d/base/tools/layer_lib.js",
+          "js/3d/base/tools/layerGroup_lib.js",
+          "js/3d/base/tools/layer_setup.js",
+          "js/3d/base/tools/sceneControlTools_lib.js",
+          "js/3d/base/tools/sceneControlTools_setup.js",
+          "js/3d/base/tools/snapshot_tools.js",
+          "js/3d/base/tools/objInfoDebug_tools.js",
+          "js/3d/base/tools/snapshot_anim_tools.js"
+        ],
+        "config": [
+          "js/config/config-node.js"
+        ]
+      }
+    },
+    "3d_configure": {
+      "node-browser-plugins":[
+        "plugins/common/handlebars.js"
+      ],
+      "node-browser-frontendConfigManager": [
+        "js/frontendConfigManager/plug/ztree.js",
+        "js/frontendConfigManager/core.js",
+        "js/frontendConfigManager/initData.js",
+        "js/frontendConfigManager/init.js"
+      ]
+    },
+    "chrome_plugin": [
+      "js/3d/t3djs/chrome-extension-helper.js"
+    ],
+    "chrome_open_t3d_page": [
+      "js/3d/t3djs/open-t3d-page.js"
+    ],
+    "3d_u3d": {
+      "common-u3d": [
+        "js/3d/u3d/u3d.js",
+        "js/3d/u3d/u3d_Assist.js",
+        "js/3d/u3d/ui-tree.js"
+      ]
+    },
+    "3d_webgl":{
+      "common-t3d-webgl":[
+        "js/3d/webgl/t3djs.js"
+      ]
+    },
+    "uweb": {
+      "uwebUtil": [
+        "js/uweb/_init_.js",
+        "js/uweb/uweb_util.js",
+        "js/uweb/uweb_layout.js",
+        "js/uweb/uinv-ui-util.js",
+        "js/uweb/uinv-ui-user.js",
+        "js/uweb/uinv-ui-bus.js"
+      ],
+      "uwebHome": [
+        "js/uweb/home/_init_.js",
+        "js/uweb/home/uweb_controller_init.js",
+        "js/uweb/home/uweb_controller_mutex.js",
+        "js/uweb/home/uweb_controller_mutexLib.js",
+        "js/uweb/home/uweb_controller_registerEvent.js",
+        "js/uweb/home/uweb_controller_exhibitionManage.js",
+        "js/uweb/home/uweb_controller_exhibitionAnim.js",
+        "js/uweb/home/uweb_controller_exhibitionDoc.js",
+        "js/uweb/home/uweb_controller_exhibitionView.js",
+        "js/uweb/home/uweb_controller_top_anim.js"
+      ]
+    },
+    "head": [
+      "js/uweb/admin/head.js"
+    ],
+    "configure_html": {
+      "plugins": [
+        "plugins/jquery/shade/rotateCircle.js",
+        "plugins/jquery/jstree/jstree.js",
+        "plugins/jquery/jquery-ztree/jquery.ztree.core-3.5.js",
+        "plugins/jquery/jquery-ztree/jquery.ztree.excheck-3.5.js",
+        "plugins/jquery/jquery-ztree/jquery.ztree.exedit-3.5.js",
+        "plugins/Colorpicke/spectrum.js"
+      ],
+      "configure-app": [
+        "js/frontendConfigManager/app.js"
+      ]
+    },
+    "config": {
+      "common": "js/config/config-common.js"
+    }
+  },
+  "css": {
+    "head": [
+      "resource/admin/css/common.css"
+    ],
+    "configure_html": [
+      "resource/css/style.css",
+      "resource/bootstrapNew/css/bootstrap.css",
+      "plugins/jquery/jquery-ztree/demo.css",
+      "plugins/jquery/jquery-ztree/metroStyle/metroStyle.css",
+      "plugins/Colorpicke/spectrum.css"
+    ]
+  }
+}

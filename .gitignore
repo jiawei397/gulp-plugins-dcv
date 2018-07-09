@@ -1,0 +1,13 @@
+# Created by .ignore support plugin (hsz.mobi)
+frame/zip/
+/.idea/
+/.vscode/
+/node_modules/
+/.eslintcache
+/*.log
+/test/unit/coverage/
+/test/test.js
+/test/e2e/reports/
+tmp/
+/test/e2e/images/
+/dist/
