@@ -3,7 +3,7 @@ const Q = require('q');
 const concat = require('gulp-concat');
 const uglify = require('gulp-uglify');
 
-const util = require('../utils/util');
+const util = require('./util');
 
 let devDir,distDir;
 
