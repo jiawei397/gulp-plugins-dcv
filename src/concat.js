@@ -37,8 +37,8 @@ var concatFun = function (map, promises) {
           var arr = key.split('-');
           str = arr[arr.length - 1];
         }
-        map[key] = ['js/' + str + '.js'];
-        promises.push(concatUtil(value, str + '.js'));
+        map[key] = ['js/' + str + '.min.js'];
+        promises.push(concatUtil(value, str + '.min.js'));
       } else {
         concatFun(value, promises);
       }
