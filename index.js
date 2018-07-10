@@ -1,7 +1,6 @@
-var utils = require('./src/util');
+var utils = {};
+utils.util = require('./src/util');
 
-utils.plugins = {
-    concat: require('./src/concat')
-};
+utils.concat = require('./src/concat');
 
 module.exports = utils;
