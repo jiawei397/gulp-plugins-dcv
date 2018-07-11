@@ -113,5 +113,26 @@ let ftpUtil = {
   }
 };
 
+/**
+ * 暴露一个上传ftp的公用方法，包括连接、删除、创建文件夹、上传、结束整个流程
+ * @author jw
+ * @date 2018-07-11
+ */
+ftpUtil.upload = function (ip, user, password, localDir, rootDir) {
+  return ftpUtil.connect(ip, user, password)
+    .then(function () {
+      return ftpUtil.rmdir(rootDir, true);
+    })
+    .then(function () {
+      return ftpUtil.mkdir(rootDir, true);
+    })
+    .then(function () {
+      return ftpUtil.puts(localDir, rootDir + '/');
+    })
+    .then(function () {
+      return ftpUtil.end();
+    });
+};
+
 // ftpUtil.connect({host: conf.ip, user: conf.user, password: conf.password});
 module.exports = ftpUtil;
