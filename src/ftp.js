@@ -30,10 +30,12 @@ let ftpUtil = {
     let deferred = Q.defer();
     client.rmdir(path, recursive, function (error) {
       if (error) {
-        console.error(error);
-        deferred.reject(new Error(error));
+        // console.error(error);
+        // deferred.reject(new Error(error));
+        console.warn('删除文件夹错误');
+        deferred.resolve(false);
       } else {
-        deferred.resolve();
+        deferred.resolve(true);
       }
     });
     return deferred.promise;
