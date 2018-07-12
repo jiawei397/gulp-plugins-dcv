@@ -27,24 +27,24 @@ module.exports = function (html, options) {
   }
   var temp = gulp.src([html], {cwd: entryDir})
     .pipe(injectString.after('<!-- start:common-pluginsJs -->', commonPluginsStr))
-    .pipe($if(options.pre, inject(gulp.src(options.pre, {read: false, cwd: cwd}), {
+    .pipe($if(!!options.pre, inject(gulp.src(options.pre, {read: false, cwd: cwd}), {
       relative: true,
       starttag: '<!-- start:pre-init -->',
       transform: options.transformJsFun
     })))
-    .pipe($if(options.init, inject(gulp.src(options.init, {read: false, cwd: cwd}), {
+    .pipe($if(!!options.init, inject(gulp.src(options.init, {read: false, cwd: cwd}), {
       relative: true,
       starttag: '<!-- start:initJs -->',
       transform: options.transformJsFun
     })))
-    .pipe($if(options.app, inject(gulp.src(options.app, {read: false, cwd: cwd}), {
+    .pipe($if(!!options.app, inject(gulp.src(options.app, {read: false, cwd: cwd}), {
       relative: true,
       starttag: '<!-- start:appJs -->',
       transform: options.transformJsFun
     })));
   var exInject = options.exInject;
   if (exInject && exInject.glob && exInject.starttag) {
-    var exInjectOptions = exInject.options || {read: false, cwd: cwd, allowEmpty: true};
+    var exInjectOptions = exInject.options || {read: false, cwd: cwd};
     temp = temp.pipe(inject(gulp.src(exInject.glob, exInjectOptions), {
       relative: true,
       starttag: exInject.starttag,
