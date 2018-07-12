@@ -3,7 +3,17 @@ const inject = require('gulp-inject');
 const injectString = require('gulp-inject-string');
 const htmlmin = require('gulp-htmlmin');
 const rename = require('gulp-rename');
-const $if = require('gulp-if');
+
+let injectHtml = function (temp, glob, cwd, starttag, transform) {
+  if (glob) {
+    temp = temp.pipe(inject(gulp.src(glob, {read: false, cwd: cwd}), {
+      relative: true,
+      starttag: starttag,
+      transform: transform
+    }));
+  }
+  return temp;
+};
 
 /**
  * 替换引用的js/css到html
@@ -26,22 +36,11 @@ module.exports = function (html, options) {
     commonPluginsStr += '<script src="' + commonPlugins + '"></script>';
   }
   var temp = gulp.src([html], {cwd: entryDir})
-    .pipe(injectString.after('<!-- start:common-pluginsJs -->', commonPluginsStr))
-    .pipe($if(!!options.pre, inject(gulp.src(options.pre, {read: false, cwd: cwd}), {
-      relative: true,
-      starttag: '<!-- start:pre-init -->',
-      transform: options.transformJsFun
-    })))
-    .pipe($if(!!options.init, inject(gulp.src(options.init, {read: false, cwd: cwd}), {
-      relative: true,
-      starttag: '<!-- start:initJs -->',
-      transform: options.transformJsFun
-    })))
-    .pipe($if(!!options.app, inject(gulp.src(options.app, {read: false, cwd: cwd}), {
-      relative: true,
-      starttag: '<!-- start:appJs -->',
-      transform: options.transformJsFun
-    })));
+    .pipe(injectString.after('<!-- start:common-pluginsJs -->', commonPluginsStr));
+
+  temp = injectHtml(temp, options.pre, cwd, '<!-- start:pre-initJs -->', options.transformJsFun);
+  temp = injectHtml(temp, options.init, cwd, '<!-- start:initJs -->', options.transformJsFun);
+  temp = injectHtml(temp, options.app, cwd, '<!-- start:appJs -->', options.transformJsFun);
   var exInject = options.exInject;
   if (exInject && exInject.glob && exInject.starttag) {
     var exInjectOptions = exInject.options || {read: false, cwd: cwd};
