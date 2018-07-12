@@ -1,6 +1,7 @@
-module.exports.util = require('./src/util');
-
-module.exports.concat = require('./src/concat');
-module.exports.delEmptyDir = require('./src/delEmptyDir');
-module.exports.ftp = require('./src/ftp');
-module.exports.inject = require('./src/inject');
+module.exports = {
+  util: require('./src/util'),
+  concat: require('./src/concat'),
+  delEmptyDir: require('./src/delEmptyDir'),
+  ftp: require('./src/ftp'),
+  inject: require('./src/inject')
+};

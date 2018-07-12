@@ -12,10 +12,11 @@
     "gulp-cache": "^1.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-htmlmin": "^3.0.0",
+    "gulp-if": "^2.0.2",
     "gulp-inject": "^4.1.0",
     "gulp-inject-string": "^1.1.1",
-    "gulp-uglify": "^3.0.0",
     "gulp-rename": "^1.2.2",
+    "gulp-uglify": "^3.0.0",
     "q": "^1.5.1"
   },
   "devDependencies": {
