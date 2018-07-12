@@ -51,10 +51,18 @@ var concatFun = function (map, promises) {
   }
 };
 
-module.exports = function (fileList, _devDir, _distDir, _cacheDirName) {
+/**
+ * 合并压缩文件
+ * @param {Array} fileList 文件内容
+ * @param {String} _devDir 初始文件夹
+ * @param {String} _distDir 目标文件夹
+ * @param {String} cacheDirName 缓存名称
+ * @author jw
+ * @date 2018-07-12
+ */
+module.exports = function (fileList, _devDir, _distDir, cacheDirName = 'dcv-fl') {
   devDir = _devDir;
   distDir = _distDir;
-  cacheDirName = _cacheDirName || 'dcv-fl';
   if (util.isWindows()) { //windows版本
     fileCache = new Cache({
       'cacheDirName': cacheDirName,

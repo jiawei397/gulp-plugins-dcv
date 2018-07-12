@@ -1,8 +1,6 @@
-var utils = {};
-utils.util = require('./src/util');
+module.exports.util = require('./src/util');
 
-utils.concat = require('./src/concat');
-utils.delEmptyDir = require('./src/delEmptyDir');
-utils.ftp = require('./src/ftp');
-
-module.exports = utils;
+module.exports.concat = require('./src/concat');
+module.exports.delEmptyDir = require('./src/delEmptyDir');
+module.exports.ftp = require('./src/ftp');
+module.exports.inject = require('./src/inject');
