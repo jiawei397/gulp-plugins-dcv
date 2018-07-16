@@ -4,6 +4,20 @@ const injectString = require('gulp-inject-string');
 const htmlmin = require('gulp-htmlmin');
 const rename = require('gulp-rename');
 
+const DEFAULT_REPLACE_PRE = '/tarsier-vmdb/dcvWeb';
+const DEFAULT_COMMON_PLUGINS_JS = '/base/js/util.js';
+const DEFAULT_ENTRY_DIR = './src/entry/';
+const DEFAULT_HTML_MIN_OPTIONS = {
+  'removeComments': true, //清除HTML注释
+  'collapseWhitespace': true, //压缩HTML
+  'collapseBooleanAttributes': true, //省略布尔属性的值 <input checked="true"/> ==> <input />
+  'removeEmptyAttributes': true, //删除所有空格作属性值 <input id="" /> ==> <input />
+  'removeScriptTypeAttributes': true, //删除<script>的type="text/javascript"
+  'removeStyleLinkTypeAttributes': true, //删除<style>和<link>的type="text/css"
+  'minifyJS': false, //压缩页面JS
+  'minifyCSS': true //压缩页面CSS
+};
+
 let injectHtml = function (temp, glob, cwd, starttag, transform) {
   if (glob) {
     temp = temp.pipe(inject(gulp.src(glob, {read: false, cwd: cwd}), {
@@ -24,8 +38,8 @@ let injectHtml = function (temp, glob, cwd, starttag, transform) {
  */
 module.exports = function (html, options) {
   var cwd = options.jsDir;
-  var entryDir = options.entryDir || './src/entry/';
-  var commonPlugins = options.commonPluginsJs || '/base/js/util.js';
+  var entryDir = options.entryDir || DEFAULT_ENTRY_DIR;
+  var commonPlugins = options.commonPluginsJs || DEFAULT_COMMON_PLUGINS_JS;
   var commonPluginsStr = '\n';
   if (Array.isArray(commonPlugins)) {
     commonPlugins = commonPlugins.map(function (str) {
@@ -53,16 +67,7 @@ module.exports = function (html, options) {
   if (options.htmlMinOptions) {
     var htmlMinOptions = options.htmlMinOptions;
     if (typeof options.htmlMinOptions === 'boolean') {
-      htmlMinOptions = {
-        'removeComments': true, //清除HTML注释
-        'collapseWhitespace': true, //压缩HTML
-        'collapseBooleanAttributes': true, //省略布尔属性的值 <input checked="true"/> ==> <input />
-        'removeEmptyAttributes': true, //删除所有空格作属性值 <input id="" /> ==> <input />
-        'removeScriptTypeAttributes': true, //删除<script>的type="text/javascript"
-        'removeStyleLinkTypeAttributes': true, //删除<style>和<link>的type="text/css"
-        'minifyJS': false, //压缩页面JS
-        'minifyCSS': true //压缩页面CSS
-      };
+      htmlMinOptions = DEFAULT_HTML_MIN_OPTIONS;
     }
     temp = temp.pipe(htmlmin(htmlMinOptions));
   }
@@ -71,7 +76,7 @@ module.exports = function (html, options) {
   }
   if (options.replace) {
     if (typeof options.replace === 'boolean') {
-      temp = temp.pipe(injectString.replace('/base/', '/tarsier-vmdb/dcvWeb/base/'));
+      temp = temp.pipe(injectString.replace('/base/', DEFAULT_REPLACE_PRE + '/base/'));
     } else if (typeof options.replace === 'string') {
       temp = temp.pipe(injectString.replace('/base/', options.replace));
     } else if (typeof options.replace === 'object') {
