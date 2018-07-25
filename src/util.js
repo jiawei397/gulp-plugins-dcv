@@ -1,16 +1,16 @@
 var Q = require('q');
 var fs = require('fs');
 var os = require('os');
-const path =require('path');
+const path = require('path');
 
-let utils = {
+let util = {
   /**
    * 克隆对象
    * @param {Object} obj 克隆的对象
    * @param {Boolean} isDeep
    * @return {Array}  克隆后的对象
    */
-  cloneObj: (function fun (obj, isDeep) {
+  cloneObj: function fun (obj, isDeep) {
     if (isDeep === undefined) isDeep = false;
 
     if (typeof obj !== 'object' || obj == null) {
@@ -39,7 +39,7 @@ let utils = {
     }
 
     return c;
-  }),
+  },
   /**
    * 合并对象 A中与B相同名称的元素会被替换成B中的值 返回长大了的A
    * @param {Object} opObjectA
@@ -49,7 +49,7 @@ let utils = {
    * @param {Boolean} isCloneObjDeep
    * @return {Object}
    */
-  combine: (function fun (opObjectA, opObjectB, isDeep, isReturnNew, isCloneObjDeep) {
+  combine: function fun (opObjectA, opObjectB, isDeep, isReturnNew, isCloneObjDeep) {
     if (isReturnNew) {
       var tempFun = util.cloneObj;
       var result = tempFun(opObjectA, isCloneObjDeep);
@@ -71,7 +71,7 @@ let utils = {
       }
     }
     return opObjectA;
-  }),
+  },
   /**
    * 合并对象 只会在A的基础上添加元素,不影响原有元素 返回长大了的A
    * @param {Object} opObjectA
@@ -81,7 +81,7 @@ let utils = {
    * @param {Boolean} isCloneObjDeep
    * @return {Object}
    */
-  combineNew: (function fun (opObjectA, opObjectB, isDeep, isReturnNew, isCloneObjDeep) {
+  combineNew: function fun (opObjectA, opObjectB, isDeep, isReturnNew, isCloneObjDeep) {
     if (isReturnNew) {
       var tempFun = util.cloneObj;
       var result = tempFun(opObjectA, isCloneObjDeep);
@@ -103,7 +103,7 @@ let utils = {
       }
     }
     return opObjectA;
-  }),
+  },
   writeToFile: function (path, data) {
     return Q.nfcall(fs.writeFile, path, data, 'utf8').then(function () {
       console.log(path + '写入完成; ');
@@ -116,13 +116,13 @@ let utils = {
   },
   readDirSync: function (fullPath, func) {
     if (!fs.existsSync(fullPath)) {
-      console.error("文件夹不存在：", fullPath);
+      console.error('文件夹不存在：', fullPath);
     } else {
       var pa = fs.readdirSync(fullPath);
       pa.forEach(function (ele, index) {
         var info = fs.statSync(path.join(fullPath, ele));
         if (info.isDirectory()) {
-          utils.readDirSync(path.join(fullPath, ele), func);
+          util.readDirSync(path.join(fullPath, ele), func);
         } else {
           func(ele, fullPath);
         }
@@ -134,4 +134,4 @@ let utils = {
   }
 };
 
-module.exports = utils;
+module.exports = util;
