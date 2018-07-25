@@ -90,7 +90,7 @@ let ftpUtil = {
         dirMap[usePath] = true;
       }
       localFileList.push(path.join(prefix, dir));
-      remoteFileList.push([destPath, usePath, path].join('/'));
+      remoteFileList.push([destPath, usePath, dir].join('/'));
     });
     for (let i in dirMap) {
       dirList.push(destPath + i);
