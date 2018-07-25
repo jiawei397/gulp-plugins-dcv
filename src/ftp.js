@@ -1,6 +1,8 @@
 const Q = require('q');
 const ftpClient = require('ftp');
 const util = require('./util');
+const path = require('path');
+
 let client = ftpClient();
 
 let ftpUtil = {
@@ -34,9 +36,9 @@ let ftpUtil = {
     }
     return deferred.promise;
   },
-  rmdir: function (path, recursive) {
+  rmdir: function (dir, recursive) {
     let deferred = Q.defer();
-    client.rmdir(path, recursive, function (error) {
+    client.rmdir(dir, recursive, function (error) {
       if (error) {
         // console.error(error);
         // deferred.reject(new Error(error));
@@ -48,9 +50,9 @@ let ftpUtil = {
     });
     return deferred.promise;
   },
-  mkdir: function (path, recursive) {
+  mkdir: function (dir, recursive) {
     let deferred = Q.defer();
-    client.mkdir(path, recursive, function (error) {
+    client.mkdir(dir, recursive, function (error) {
       if (error) {
         console.error(error);
         deferred.reject(new Error(error));
@@ -82,13 +84,13 @@ let ftpUtil = {
     let dirList = [];
     let localFileList = [];
     let remoteFileList = [];
-    util.readDirSync(localPath, function (path, prefix) {
+    util.readDirSync(localPath, function (dir, prefix) {
       let usePath = prefix.substr(localPath.length + 1).replace(/\\/g, '/');
       if (usePath) {
         dirMap[usePath] = true;
       }
-      localFileList.push([prefix, path].join('\\'));
-      remoteFileList.push([destPath, usePath, path].join('/'));
+      localFileList.push(path.join(prefix, dir));
+      remoteFileList.push(path.join(destPath, usePath, dir));
     });
     for (let i in dirMap) {
       dirList.push(destPath + i);
