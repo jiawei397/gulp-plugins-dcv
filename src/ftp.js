@@ -57,7 +57,7 @@ let ftpUtil = {
         console.warn('创建文件夹' + dir + '失败', error);
         deferred.reject(new Error(error));
       } else {
-        console.log('创建文件夹' + dir + '成功!');
+        // console.log('创建文件夹' + dir + '成功!');
         deferred.resolve();
       }
     });
@@ -79,8 +79,7 @@ let ftpUtil = {
   /**
    * 上传文件夹到目标文件夹
    */
-  puts: function (localPath, destPath) {
-    let deferred = Q.defer();
+  puts: async function (localPath, destPath) {
     let dirMap = {};
     let dirList = [];
     let localFileList = [];
@@ -94,8 +93,8 @@ let ftpUtil = {
       let remoteFilePath = usePath ? [destPath, usePath, dir].join('/') : [destPath, dir].join('/');
       remoteFileList.push(remoteFilePath);
     });
-    for (let i in dirMap) {
-      dirList.push(destPath + i);
+    for (let key in dirMap) {
+      dirList.push(destPath + '/' + key);
     }
     dirList.sort();
     let dirPromiseArray = [];
@@ -108,20 +107,16 @@ let ftpUtil = {
     for (let i = 0; i < localFileList.length; i++) {
       filePormiseArray.push(ftpUtil.put(localFileList[i], remoteFileList[i]));
     }
-    Q.all(dirPromiseArray)
-      .then(function () {
-        return Q.all(filePormiseArray);
-      })
-      .then(function () {
-        deferred.resolve(localFileList);
-      });
-    return deferred.promise;
+    try {
+      await Q.all(dirPromiseArray);
+      await Q.all(filePormiseArray);
+    } catch (e) {
+      console.error(e);
+    }
+    return localFileList;
   },
   end: function () {
-    let deferred = Q.defer();
     client.end();
-    deferred.resolve();
-    return deferred;
   }
 };
 
@@ -142,7 +137,8 @@ ftpUtil.upload = function (ip, user, password, localDir, rootDir) {
       return ftpUtil.puts(localDir, rootDir);
     })
     .then(function () {
-      return ftpUtil.end();
+      console.log('-------上传结束--------');
+      ftpUtil.end();
     });
 };
 
