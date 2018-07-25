@@ -2,7 +2,6 @@ const Q = require('q');
 const ftpClient = require('ftp');
 const util = require('./util');
 const path = require('path');
-
 let client = ftpClient();
 
 let ftpUtil = {
@@ -42,9 +41,10 @@ let ftpUtil = {
       if (error) {
         // console.error(error);
         // deferred.reject(new Error(error));
-        console.warn('删除文件夹错误');
+        console.warn('删除文件夹' + dir + '失败!');
         deferred.resolve(false);
       } else {
+        console.log('删除文件夹' + dir + '成功!');
         deferred.resolve(true);
       }
     });
@@ -54,9 +54,10 @@ let ftpUtil = {
     let deferred = Q.defer();
     client.mkdir(dir, recursive, function (error) {
       if (error) {
-        console.error(error);
+        console.warn('创建文件夹' + dir + '失败', error);
         deferred.reject(new Error(error));
       } else {
+        console.log('创建文件夹' + dir + '成功!');
         deferred.resolve();
       }
     });
@@ -90,7 +91,8 @@ let ftpUtil = {
         dirMap[usePath] = true;
       }
       localFileList.push(path.join(prefix, dir));
-      remoteFileList.push([destPath, usePath, dir].join('/'));
+      let remoteFilePath = usePath ? [destPath, usePath, dir].join('/') : [destPath, dir].join('/');
+      remoteFileList.push(remoteFilePath);
     });
     for (let i in dirMap) {
       dirList.push(destPath + i);
@@ -137,12 +139,14 @@ ftpUtil.upload = function (ip, user, password, localDir, rootDir) {
       return ftpUtil.mkdir(rootDir, true);
     })
     .then(function () {
-      return ftpUtil.puts(localDir, rootDir + '/');
+      return ftpUtil.puts(localDir, rootDir);
     })
     .then(function () {
       return ftpUtil.end();
     });
 };
 
-// ftpUtil.connect({host: conf.ip, user: conf.user, password: conf.password});
+// const conf = require('../data/ftp_config');
+// let dir = __dirname;
+// ftpUtil.upload(conf.ip, conf.user, conf.password, dir, conf.releaseRootDir);
 module.exports = ftpUtil;
