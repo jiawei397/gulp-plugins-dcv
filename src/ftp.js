@@ -8,8 +8,15 @@ let ftpUtil = {
   connect: function (ip, user, password) {
     let deferred = Q.defer();
     try {
+      let host = ip;
+      let port = 21;
+      if (ip.includes(':')) {
+        host = ip.split(':')[0];
+        port = ip.split(':')[1];
+      }
       client.connect({
-        host: ip,
+        host: host,
+        port: port,
         user: user,
         password: password
       });
@@ -18,6 +25,7 @@ let ftpUtil = {
           console.error(error);
           deferred.reject(new Error(error));
         } else {
+          console.log('connect success');
           deferred.resolve();
         }
       });
