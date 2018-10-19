@@ -125,9 +125,12 @@ let ftpUtil = {
  * @author jw
  * @date 2018-07-11
  */
-ftpUtil.upload = function (ip, user, password, localDir, rootDir) {
+ftpUtil.upload = function (ip, user, password, localDir, rootDir, isNotRmDir) {
   return ftpUtil.connect(ip, user, password)
     .then(function () {
+      if (isNotRmDir) { //不删除文件夹
+        return Promise.resolve();
+      }
       return ftpUtil.rmdir(rootDir, true);
     })
     .then(function () {
