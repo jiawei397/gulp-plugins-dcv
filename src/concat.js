@@ -16,8 +16,9 @@ let concatUtil = function (arr, name, cwd, dest) {
   gulp.src(arr, {read: true, cwd: cwd})
     .pipe(cache(uglify({
       compress: {
-        drop_console: true, //删除console
-        drop_debugger: true, //删除debugger
+        // drop_console: true, //删除console
+        drop_debugger: false, //删除debugger
+        pure_funcs: ['console.log', 'console.time', 'console.timeEnd', 'console.warn'],
         typeofs: false //typeof xxx === "undefined"
       }
     }), {
