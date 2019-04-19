@@ -4,7 +4,7 @@ const injectString = require('gulp-inject-string');
 const htmlmin = require('gulp-htmlmin');
 const rename = require('gulp-rename');
 
-const DEFAULT_REPLACE_PRE = '/tarsier-vmdb/dcvWeb';
+const DEFAULT_REPLACE_PRE = '/tarsier-dcv/dcvWeb';
 const DEFAULT_COMMON_PLUGINS_JS = '/base/js/util.js';
 const DEFAULT_ENTRY_DIR = './src/entry/';
 const DEFAULT_HTML_MIN_OPTIONS = {
@@ -40,6 +40,7 @@ module.exports = function (html, options) {
   var cwd = options.jsDir;
   var entryDir = options.entryDir || DEFAULT_ENTRY_DIR;
   var commonPlugins = options.commonPluginsJs || DEFAULT_COMMON_PLUGINS_JS;
+  var replacePre = options.replacePre || DEFAULT_REPLACE_PRE;
   var commonPluginsStr = '\n';
   if (Array.isArray(commonPlugins)) {
     commonPlugins = commonPlugins.map(function (str) {
@@ -76,7 +77,7 @@ module.exports = function (html, options) {
   }
   if (options.replace) {
     if (typeof options.replace === 'boolean') {
-      temp = temp.pipe(injectString.replace('/base/', DEFAULT_REPLACE_PRE + '/base/'));
+      temp = temp.pipe(injectString.replace('/base/', replacePre + '/base/'));
     } else if (typeof options.replace === 'string') {
       temp = temp.pipe(injectString.replace('/base/', options.replace));
     } else if (typeof options.replace === 'object') {
