@@ -18,7 +18,7 @@ let concatUtil = function (arr, name, cwd, dest) {
       compress: {
         // drop_console: true, //删除console
         drop_debugger: false, //删除debugger
-        pure_funcs: ['console.log', 'console.time', 'console.timeEnd', 'console.warn'],
+        pure_funcs: ['console.log'],
         typeofs: false //typeof xxx === "undefined"
       }
     }), {
