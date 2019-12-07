@@ -4,5 +4,5 @@ module.exports = {
   delEmptyDir: require('./src/delEmptyDir'),
   ftp: require('./src/ftp'),
   inject: require('./src/inject'),
-  dealFrame: require('./src/dealFrame')
+  dealFrame: require('./src/dealFrame'),
 };

@@ -129,8 +129,18 @@ let util = {
       });
     }
   },
+  mkdirsSync: function mkdirsSync (dirname) {
+    //console.log(dirname);
+    if (fs.existsSync(dirname)) {
+      return true;
+    }
+    if (mkdirsSync(path.dirname(dirname))) {
+      fs.mkdirSync(dirname);
+      return true;
+    }
+  },
   isWindows: function () {
-    return os.platform() == 'win32';
+    return os.platform() === 'win32';
   }
 };
 
